@@ -11,7 +11,7 @@
     . "$SCRIPT_DIR/includes/util.sh"
     . "$SCRIPT_DIR/includes/log.sh"
     . "$SCRIPT_DIR/includes/exec.sh"
-```
+    ```
 
 ## Environment variables
 
