@@ -3,7 +3,7 @@
 # shellcheck disable=SC2034
 
 # Default varable values
-TOOLBOX_LOG_LEVEL=${TOOLBOX_LOG_LEVEL:-INFO}
+export TOOLBOX_LOG_LEVEL=${TOOLBOX_LOG_LEVEL:-INFO}
 
 RESTORE=$(echo -en '\033[0m')
 RED=$(echo -en '\033[00;31m')
@@ -29,7 +29,7 @@ function _log {
       TRACE)  [[ $TOOLBOX_LOG_LEVEL =~ TRACE ]]                 && echo "${LYELLOW}$*${RESTORE}" 1>&2 ;;
       DEBUG)  [[ $TOOLBOX_LOG_LEVEL =~ TRACE|DEBUG ]]           && echo "${LMAGENTA}$*${RESTORE}" 1>&2 ;;
       INFO)   [[ $TOOLBOX_LOG_LEVEL =~ TRACE|DEBUG|INFO ]]      && echo "${GREEN}$*${RESTORE}" 1>&2  ;;
-      WARN)   [[ $TOOLBOX_LOG_LEVEL =~ TRACE|DEBUG|INFO|WARN ]] && echo "${YELLOW}$*${RESTORE}" 1>&2  ;;
+      WARNING)   [[ $TOOLBOX_LOG_LEVEL =~ TRACE|DEBUG|INFO|WARNING ]] && echo "${YELLOW}$*${RESTORE}" 1>&2  ;;
       ERROR)  [[ ! $TOOLBOX_LOG_LEVEL =~ NONE ]]                && echo "${RED}$*${RESTORE}" 1>&2 ;;
   esac
   true;

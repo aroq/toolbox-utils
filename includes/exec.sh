@@ -39,15 +39,15 @@ function toolbox_exec_hook {
   local _hook="${2}"
   _log DEBUG "Check if hooks exist: toolbox/hooks/${_context}/${_hook}"
   if [[ -f "toolbox/hooks/${_context}/${_hook}" ]]; then
-    _log DEBUG "Execute hook: toolbox/hooks/${_context}/${_hook} $*"
-    "toolbox/hooks/${_context}/${_hook}" "$@"
+    _log INFO "Execute hook: toolbox/hooks/${_context}/${_hook} $*"
+    . "toolbox/hooks/${_context}/${_hook}" "$@"
   fi
 
   if [[ -d "toolbox/hooks/${_context}/${_hook}" ]]; then
     for f in toolbox/hooks/"${_context}"/before/*
     do
-      _log DEBUG "Execute hook: ${f} $*"
-      ${f} "$@"
+      _log INFO "Execute hook: ${f} $*"
+      . ${f} "$@"
     done
   fi
 }
