@@ -11,4 +11,3 @@ function toolbox_util_read_var_from_env_file() {
    echo "${VAR[1]}"
    set -u
 }
-

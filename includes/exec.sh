@@ -37,17 +37,28 @@ function toolbox_run {
 function toolbox_exec_hook {
   local _context="${1}"
   local _hook="${2}"
-  _log DEBUG "Check if hooks exist: toolbox/hooks/${_context}/${_hook}"
-  if [[ -f "toolbox/hooks/${_context}/${_hook}" ]]; then
-    _log INFO "Execute hook: toolbox/hooks/${_context}/${_hook} $*"
-    . "toolbox/hooks/${_context}/${_hook}" "$@"
-  fi
 
-  if [[ -d "toolbox/hooks/${_context}/${_hook}" ]]; then
-    for f in toolbox/hooks/"${_context}"/before/*
-    do
-      _log INFO "Execute hook: ${f} $*"
-      . ${f} "$@"
-    done
-  fi
+  TOOLBOX_TOOL_DIRS=${TOOLBOX_TOOL_DIRS:-toolbox}
+
+  for i in ${TOOLBOX_TOOL_DIRS//,/ }
+  do
+    _log DEBUG "Check if hooks dir exists at path: ${i}/hooks"
+    if [[ -d "${i}/hooks" ]]; then
+      local _hooks_path="${i}/hooks"
+      _log DEBUG "Check if hooks exist: ${_hooks_path}/${_context}/${_hook}"
+      if [[ -f "${_hooks_path}/${_context}/${_hook}" ]]; then
+        _log DEBUG "Execute hook: ${_hooks_path}/${_context}/${_hook} $*"
+        . "${_hooks_path}"/"${_context}"/"${_hook}" "$@"
+      fi
+
+      if [[ -d "${_hooks_path}/${_context}/${_hook}" ]]; then
+        for f in "${_hooks_path}"/"${_context}"/${_hook}/*
+        do
+          _log DEBUG "Execute hook: ${f} $*"
+          . "${f}" "$@"
+        done
+      fi
+    fi
+  done
+
 }
