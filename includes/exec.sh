@@ -60,17 +60,22 @@ function toolbox_exec_hook {
       _log TRACE "Check if hooks exist: ${_hooks_path}/${_context}/${_hook}"
       if [[ -f "${_hooks_path}/${_context}/${_hook}" ]]; then
         _log DEBUG "Execute hook: ${_hooks_path}/${_context}/${_hook} $*"
+        (
         . "${_hooks_path}"/"${_context}"/"${_hook}" "$@"
+        )
       fi
 
       if [[ -d "${_hooks_path}/${_context}/${_hook}" ]]; then
         for f in "${_hooks_path}"/"${_context}"/"${_hook}"/*
         do
           _log DEBUG "Execute hook: ${f} $*"
+          (
           . "${f}" "$@"
+          )
         done
       fi
     fi
   done
 
 }
+
