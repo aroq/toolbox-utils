@@ -1,3 +1,6 @@
+Version 0.1.9:
+ - Add tracing for hooks
+
 Version 0.1.8:
  - Execute hooks in subshell
 
