@@ -61,7 +61,12 @@ function toolbox_exec_hook {
       if [[ -f "${_hooks_path}/${_context}/${_hook}" ]]; then
         _log DEBUG "Execute hook: ${_hooks_path}/${_context}/${_hook} $*"
         (
-        . "${_hooks_path}"/"${_context}"/"${_hook}" "$@"
+          _log DEBUG "$(cat "${_hooks_path}"/"${_context}"/"${_hook}")"
+          if [ "${TOOLBOX_LOG_LEVEL}" = "TRACE" ]; then set -x; fi
+
+          . "${_hooks_path}"/"${_context}"/"${_hook}" "$@"
+
+          if [ "${TOOLBOX_LOG_LEVEL}" = "TRACE" ]; then set +x; fi
         )
       fi
 
@@ -70,12 +75,15 @@ function toolbox_exec_hook {
         do
           _log DEBUG "Execute hook: ${f} $*"
           (
-          . "${f}" "$@"
+            _log DEBUG "$(cat "${f}")"
+            if [ "${TOOLBOX_LOG_LEVEL}" = "TRACE" ]; then set -x; fi
+
+            . "${f}" "$@"
+
+            if [ "${TOOLBOX_LOG_LEVEL}" = "TRACE" ]; then set +x; fi
           )
         done
       fi
     fi
   done
-
 }
-
