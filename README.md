@@ -1,4 +1,4 @@
-# Bash utils for various tasks
+# Bash utils library for various tasks
 
 ## How to include and use
 
@@ -10,19 +10,12 @@
     . "$SCRIPT_DIR/includes/init.sh"
     . "$SCRIPT_DIR/includes/util.sh"
     . "$SCRIPT_DIR/includes/log.sh"
-    . "$SCRIPT_DIR/includes/exec.sh"
     ```
 
 ## Environment variables
 
-- TOOLBOX_EXEC_LOG_PREFIX
-  Default value: "---> "
-
 - TOOLBOX_BASH_SET_OPTIONS
   Default value: *empty*
-
-- TOOLBOX_LOG_LEVEL
-  Default value: INFO
 
 - TOOLBOX_LOG_LEVEL
   Default value: INFO
