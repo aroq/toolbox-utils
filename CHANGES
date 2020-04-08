@@ -1,3 +1,6 @@
+Version 0.1.10:
+ - Move exec into aroq/toolbox-exec repo
+
 Version 0.1.9:
  - Add tracing for hooks
 
